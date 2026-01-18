@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>FWI Predictor</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="icon" href="{{ url_for('static', filename='images/favicon.ico') }}">
+
+</head>
+
+<body>
+
+    <div class="topbar">
+        <span class="menu-btn" onclick="toggleSidebar()">☰</span>
+
+        <img src="static/images/flame.jpg" alt="FWI Logo" class="logo">
+
+        <span class="title">Forest Weather Index Predictor</span>
+    </div>
+    <div class="layout">
+        <div id="sidebar" class="sidebar">
+            <h3>FWI Guide</h3>
+
+            <ul class="menu-list">
+                <li class="active" onclick="showSection('overview')">Fire Weather Index</li>
+
+                <li onclick="showSection('terms')">Relevant Features Of FWI</li>
+                <li onclick="showSection('calculation')">FWI Calculation</li>
+                <li onclick="showSection('articles')">Articles</li>
+            </ul>
+        </div>
+        <div class="main-content">
+            <div id="info-container">
+                <div class="info-section " id="overview">
+                    <h2>What is FWI?</h2>
+                    <p>
+                        The Forest Weather Index (FWI) is a numerical indicator used to
+                        estimate forest fire danger based on weather conditions and
+                        fuel moisture levels.
+                    </p>
+                    <p>The Fire Weather Index (FWI) is a comprehensive and internationally recognized system used to
+                        evaluate
+                        and quantify the potential risk and intensity of forest fires based solely on weather
+                        conditions.
+                        Developed to support fire management and disaster preparedness, the FWI integrates critical
+                        meteorological
+                        parameters such as air temperature, relative humidity, wind speed, and accumulated rainfall to
+                        assess how
+                        conducive the environment is to wildfire ignition and spread. Rather than directly predicting
+                        the occurrence
+                        of fires, the FWI estimates the dryness of forest fuels and the likely behavior of a fire if
+                        ignition occurs.</p>
+
+                    <p>The system is structured into multiple components that represent different layers of forest fuel
+                        moisture and fire dynamics.
+                        These components collectively capture short-term and long-term drying trends, surface fuel
+                        flammability, and deeper organic
+                        layer conditions. By combining these elements, the FWI produces a final numerical index that
+                        reflects the potential fire intensity
+                        and difficulty of fire control. Higher FWI values indicate more severe fire weather conditions,
+                        often associated with rapid fire spread,
+                        increased flame intensity, and greater challenges for suppression efforts.</p>
+
+                    <p>Due to its reliability and simplicity, the FWI is widely adopted by meteorological agencies,
+                        forestry departments, and disaster management
+                        authorities across the world. It plays a crucial role in early warning systems, strategic
+                        resource
+                        allocation, and policy planning related
+                        to wildfire prevention and response. In research and predictive modeling, the FWI also serves as
+                        an
+                        important target variable, enabling the
+                        development of data-driven tools that support proactive forest fire risk assessment and
+                        environmental safety planning.</p>
+                </div>
+
+                <div class="info-section" id="terms">
+                    <h2>Features affecting Fire</h2>
+                    <ul>
+
+                        <ul>
+                            <h4>Core Meteorological Input Features</h4>
+
+                            <b>These are the primary weather parameters required to compute the Fire Weather Index (FWI)
+                                system.</b>
+                            <li><b>1. Temperature (°C)</b><br> Temperature represents the ambient air temperature near
+                                the forest surface.
+                                Higher temperatures accelerate the drying of forest fuels, making them more combustible
+                                and increasing the likelihood of fire ignition
+                                and spread. </li>
+                            <li><b>2. Relative Humidity (RH %)</b><br> Relative Humidity measures the amount of moisture
+                                present in the air compared to the maximum it can hold at a given temperature. Low
+                                relative humidity leads to drier fuels, increasing flammability and fire risk. </li>
+                            <li><b>3. Wind Speed (km/h)</b><br> Wind speed indicates the horizontal movement of air near
+                                the ground. Stronger winds supply oxygen to fires, increase flame length, and
+                                significantly enhance the rate and direction of fire spread. </li>
+                            <li><b>4. Rainfall (mm)</b><br> Rainfall represents the amount of precipitation received
+                                over a given period. Rain reduces fire danger by increasing moisture content in forest
+                                fuels and slowing down fuel drying processes. </li>
+                        </ul>
+
+
+                        <ul>
+                            <h4> Moisture Codes (Intermediate Indices)</h4>
+
+                            <b>These indices describe the moisture content of different forest fuel layers.</b>
+                            <li><b>5. FFMC - Fine Fuel Moisture Code</b><br> FFMC represents the moisture content of
+                                surface-level fine fuels such as dry leaves, grass, pine needles, and small twigs. It
+                                reflects short-term drying and wetting effects and is highly sensitive to daily weather
+                                changes. Higher FFMC values indicate very dry surface fuels that ignite easily. </li>
+                            <li><b>6. DMC - Duff Moisture Code</b><br> DMC measures the moisture content of moderately
+                                deep
+                                organic layers (loosely compacted forest floor material). It reflects medium-term drying
+                                trends influenced by temperature and rainfall over several days to weeks. Higher DMC
+                                values
+                                indicate drier conditions and increased fire sustainability. </li>
+                            <li><b>7. DC - Drought Code</b><br> DC represents the moisture content of deep, compact
+                                organic
+                                soil layers. It reflects long-term drying effects caused by extended periods of dry
+                                weather
+                                and drought. Higher DC values indicate severe drought conditions and the potential for
+                                deep-burning fires. </li>
+                        </ul>
+
+
+                        <ul>
+                            <h4>Fire Behavior Indices</h4>
+
+                            <b>These indices describe how a fire is likely to behave once ignited.</b>
+                            <li><b>8. ISI - Initial Spread Index</b><br> ISI combines the effects of wind speed
+                                and FFMC
+                                to estimate the expected rate of fire spread immediately after ignition. Higher
+                                ISI
+                                values indicate faster-spreading fires that are harder to control. </li>
+                            <li><b>9. BUI - Buildup Index</b><br> BUI represents the total amount of fuel
+                                available for
+                                combustion by combining DMC and DC. It reflects the overall dryness and quantity
+                                of
+                                burnable material in the forest. Higher BUI values indicate more fuel
+                                accumulation and
+                                greater fire intensity potential. </li>
+                        </ul>
+                    </ul>
+                </div>
+
+                <div class="info-section" id="calculation">
+                    <h2>How the Fire Weather Index (FWI) Is Calculated</h2>
+
+                    <p>
+                        The Fire Weather Index (FWI) is calculated through a multi-stage process that combines
+                        meteorological inputs with fuel moisture and fire behavior indices. The system does not
+                        directly predict fire occurrence; instead, it estimates potential fire intensity based on
+                        weather-driven fuel conditions.
+                    </p>
+
+                    <h4>Step 1: Collection of Meteorological Inputs</h4>
+                    <p>
+                        The calculation begins with the collection of daily weather observations, which include
+                        air temperature, relative humidity, wind speed, and rainfall. These variables influence
+                        the drying and wetting of forest fuels and form the foundation of the FWI system.
+                    </p>
+
+                    <h4>Step 2: Computation of Fuel Moisture Codes</h4>
+                    <p>
+                        Using the meteorological inputs, three fuel moisture codes are calculated:
+                    </p>
+                    <ul>
+                        <li>
+                            <b>Fine Fuel Moisture Code (FFMC):</b>
+                            Estimates the moisture content of surface-level fine fuels and responds rapidly to
+                            daily weather changes.
+                        </li>
+                        <li>
+                            <b>Duff Moisture Code (DMC):</b>
+                            Represents the moisture content of moderately deep organic layers and reflects
+                            medium-term drying trends.
+                        </li>
+                        <li>
+                            <b>Drought Code (DC):</b>
+                            Indicates the moisture content of deep soil layers and captures long-term drought
+                            effects.
+                        </li>
+                    </ul>
+
+                    <h4>Step 3: Calculation of Fire Behavior Indices</h4>
+                    <p>
+                        The fuel moisture codes are then combined with wind speed to estimate fire behavior:
+                    </p>
+                    <ul>
+                        <li>
+                            <b>Initial Spread Index (ISI):</b>
+                            Calculated using wind speed and FFMC, it estimates the expected rate of fire spread
+                            immediately after ignition.
+                        </li>
+                        <li>
+                            <b>Buildup Index (BUI):</b>
+                            Derived from DMC and DC, it represents the total amount of fuel available for
+                            combustion.
+                        </li>
+                    </ul>
+
+                    <h4>Step 4: Final Fire Weather Index (FWI) Calculation</h4>
+                    <p>
+                        The final FWI value is computed by combining the Initial Spread Index (ISI) and the
+                        Buildup Index (BUI). This value represents the potential intensity of a fire under
+                        current weather conditions. Higher FWI values indicate more severe fire danger,
+                        faster fire spread, and increased difficulty in fire suppression.
+                    </p>
+
+                    <h4>Summary</h4>
+                    <p>
+                        In summary, the FWI calculation follows a hierarchical structure:
+                        meteorological inputs influence fuel moisture codes, which determine fire behavior
+                        indices, ultimately producing a single Fire Weather Index value that reflects overall
+                        fire danger.
+                    </p>
+
+                </div>
+
+                <div class="info-section " id="articles">
+                    <h2>Related Articles</h2>
+
+                    <ul class="article-links">
+                        <ul><a href="https://arccjournals.com/journal/indian-journal-of-agricultural-research/A-6254"
+                                target="_blank">Forest Fire Hazards and Livelihood Vulnerability
+                            </a></ul>
+                        <ul><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC9286820/" target="_blank">Imapct of
+                                Forest
+                                Fires in US
+                            </a></ul>
+                        <ul><a href="https://www.wri.org/insights/global-trends-forest-fires" target="_blank">Future
+                                Damages from Fires
+                            </a></ul>
+                        <ul><a href="https://www.bbc.com/news/articles/cx2pndlp0lko" target="_blank">Damages of Forest
+                                Fires
+                            </a></ul>
+                    </ul>
+
+                </div>
+            </div>
+
+
+            <div class="container" id="form-section">
+
+                <h3>Enter Weather Parameters</h3>
+
+                <form action="/predict" method="POST">
+                    <input type="number" step="any" name="Temperature" placeholder="Temperature" required>
+                    <input type="number" step="any" name="RH" placeholder="Relative Humidity" required>
+                    <input type="number" step="any" name="Ws" placeholder="Wind Speed" required>
+                    <input type="number" step="any" name="Rain" placeholder="Rainfall" required>
+                    <input type="number" step="any" name="FFMC" placeholder="FFMC" required>
+                    <input type="number" step="any" name="DMC" placeholder="DMC" required>
+                    <input type="number" step="any" name="DC" placeholder="DC" required>
+                    <input type="number" step="any" name="ISI" placeholder="ISI" required>
+                    <input type="number" step="any" name="BUI" placeholder="BUI" required>
+
+                    <button type="submit">Predict FWI</button>
+                </form>
+            </div>
+
+        </div>
+    </div>
+    <script>
+        function toggleSidebar() {
+            document.getElementById("sidebar").classList.toggle("open");
+        }
+
+        function showSection(sectionId) {
+            document.getElementById("sidebar").classList.remove("open");
+            document.getElementById("form-section").style.display = "none";
+            const sections = document.querySelectorAll(".info-section");
+            sections.forEach(section => section.classList.remove("active"));
+            document.getElementById(sectionId).classList.add("active");
+        }
+    </script>
+
+
+</body>
+
+</html>

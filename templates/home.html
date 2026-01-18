@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>FWI Result</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="icon" href="{{ url_for('static', filename='images/favicon.ico') }}">
+
+</head>
+
+<body>
+    <div class="topbar">
+        <img src="static/images/flame.jpg" alt="FWI Logo" class="logo">
+        <span class="title">Forest Weather Index Predictor</span>
+    </div>
+
+    <div class="container">
+        <h3>Fire Weather Index </h3>
+
+        <div class="result">
+            <p>Predicted FWI:</p>
+            <h2>{{ prediction }}</h2>
+
+            <p class="risk {{ risk_class }}">
+                {{ risk }}
+            </p>
+
+            <div class="context">
+                <h4>Possible Causes</h4>
+                <ul>
+                    {% for cause in causes %}
+                    <li>{{ cause }}</li>
+                    {% endfor %}
+                </ul>
+
+                <h4>Recommended Precautions</h4>
+                <ul>
+                    {% for precaution in precautions %}
+                    <li>{{ precaution }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+
+
+        <a href="/">Go Back</a>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,258 @@
+* {
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    background-image:
+        linear-gradient(rgba(31, 64, 55, 0.6), rgba(31, 64, 55, 0.6)),
+        url("/static/images/forest_fire.jpg");
+
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+.topbar {
+    display: flex;
+    align-items: center;
+    padding: 15px 20px;
+    background: #6b7f3f;
+    color: white;
+}
+
+.menu-btn {
+    cursor: pointer;
+    font-size: 22px;
+    margin-right: 15px;
+}
+
+
+.layout {
+    display: flex;
+    height: calc(100vh - 60px);
+}
+
+
+.sidebar {
+    width: 0;
+    background: #f4f6f2;
+    overflow-x: hidden;
+    transition: width 0.3s ease;
+    padding: 0;
+    border-right: 1px solid #ccc;
+}
+
+.sidebar.open {
+    width: 300px;
+    padding: 20px;
+}
+
+.sidebar h3 {
+    margin-top: 0;
+}
+
+.sidebar ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.sidebar ul li {
+    margin-bottom: 10px;
+}
+
+.sidebar ul li a {
+    text-decoration: none;
+    color: #2c3e50;
+    font-weight: bold;
+}
+
+.sidebar-content {
+    margin-top: 20px;
+    font-size: 14px;
+}
+
+
+.main-content {
+    flex: 1;
+    padding: 30px;
+    overflow-y: auto;
+}
+
+.container {
+    background: rgba(255, 255, 255, 0.92);
+    padding: 30px 40px;
+    border-radius: 12px;
+    width: 380px;
+    margin: 40px auto;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+}
+
+.container h2,
+.container h3 {
+    text-align: center;
+    color: #2c3e50;
+    margin-top: 0;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+input {
+    margin: 8px 0;
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+    transition: border 0.3s, box-shadow 0.3s;
+}
+
+input:focus {
+    border-color: #27ae60;
+    outline: none;
+    box-shadow: 0 0 5px rgba(39, 174, 96, 0.5);
+}
+
+button {
+    margin-top: 15px;
+    padding: 12px;
+    background: #27ae60;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.2s;
+}
+
+button:hover {
+    background: #219150;
+    transform: translateY(-2px);
+}
+
+.result {
+    margin-top: 20px;
+    text-align: center;
+    font-size: 18px;
+    color: #34495e;
+}
+
+.result h2 {
+    margin: 10px 0;
+    font-size: 36px;
+}
+
+.risk {
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.risk.low {
+    color: green;
+}
+
+.risk.moderate {
+    color: orange;
+}
+
+.risk.high {
+    color: red;
+}
+
+.risk.very-high {
+    color: darkred;
+}
+
+.risk.extreme {
+    color: purple;
+}
+
+.context {
+    margin-top: 20px;
+    text-align: left;
+}
+
+.context h4 {
+    margin-bottom: 5px;
+    color: #2c3e50;
+}
+
+.context ul {
+    padding-left: 20px;
+    margin-bottom: 15px;
+}
+
+.context li {
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+
+a {
+    display: block;
+    margin-top: 15px;
+    text-align: center;
+    text-decoration: none;
+    color: #27ae60;
+    font-weight: bold;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+.menu-list {
+    list-style: none;
+    padding-left: 0;
+}
+
+.menu-list li {
+    padding: 10px;
+    cursor: pointer;
+    font-weight: bold;
+    color: #2c3e50;
+}
+
+.menu-list li:hover {
+    background: #dde5d0;
+}
+
+.menu-list li.active {
+    background: #cddbb5;
+    border-left: 4px solid #6b7f3f;
+}
+
+#info-container {
+    max-width: 900px;
+    margin: 40px auto;
+}
+
+.info-section {
+    display: none;
+    background: rgba(255, 255, 255, 0.95);
+    padding: 25px;
+    border-radius: 10px;
+    width: 100%;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+.info-section.active {
+    display: block;
+}
+
+.logo {
+    height: 32px;
+    width: auto;
+    margin-right: 10px;
+}
+
+.title {
+    font-size: 18px;
+    font-weight: bold;
+    white-space: nowrap;
+}
